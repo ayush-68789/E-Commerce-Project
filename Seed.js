@@ -19,6 +19,12 @@ const products = [
         img : "https://c.shld.net/rpx/i/s/i/spin/image/spin_prod_819188912??hei=64&wid=64&qlt=50" ,
         price : 100,
         desc : "Mummy ke liye boht useful lagane ke liye bhi aur maarne ke liye bhi"
+    } ,
+    {
+        name : "Pocha",
+        img : "https://c.shld.net/rpx/i/s/i/spin/image/spin_prod_819188912??hei=64&wid=64&qlt=50" ,
+        price : 300,
+        desc : "Mummy ke liye boht useful lagane ke liye bhi aur maarne ke liye bhi"
     }
 ]
 

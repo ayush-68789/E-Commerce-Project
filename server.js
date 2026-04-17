@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const seedDB = require('./Seed') ;
 const productRoutes = require('./routes/product') ;
 
+const ejsMate = require('ejs-mate') ;
+
 mongoose.connect('mongodb://127.0.0.1:27017/Shopping_App')
 .then(()=> {
     console.log('DB CONNECTED SUCCESSFULLY') ; 
@@ -13,6 +15,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/Shopping_App')
     console.log(`DB NOT CONNECTED Error : ${err}`) ;
 })
 // views 
+app.engine('ejs', ejsMate) ;
 app.set('view engine', 'ejs') ; 
 app.set('views', path.join(__dirname , 'views')) ;
 

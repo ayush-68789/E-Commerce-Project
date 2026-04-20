@@ -4,6 +4,7 @@ const path = require('path') ;
 const mongoose = require('mongoose');
 const seedDB = require('./Seed') ;
 const productRoutes = require('./routes/product') ;
+const methodoverride = require('method-override') ;
 
 const ejsMate = require('ejs-mate') ;
 
@@ -22,6 +23,11 @@ app.set('views', path.join(__dirname , 'views')) ;
 // public
 app.set(express.static(path.join(__dirname , 'public'))) ;
 
+// for fetching req body
+app.use(express.urlencoded({extended:true})) ;
+
+// for method-Overriding
+app.use(methodoverride('_method')) ;
 // Sededing DB
 // seedDB();
 

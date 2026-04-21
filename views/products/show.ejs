@@ -17,6 +17,40 @@
 
         <div class="col-lg-6">
             <h1 class="display-5">Leave a Review</h1>
+            <form action="/products/<%= found._id %>/review" method="POST">
+                <fieldset class="starability-basic">
+                    <legend>Rating :</legend>
+                    <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating." />
+                    <input type="radio" id="first-rate1" name="rating" value="1" />
+                    <label for="first-rate1" title="Terrible">1 star</label>
+                    <input type="radio" id="first-rate2" name="rating" value="2" />
+                    <label for="first-rate2" title="Not good">2 stars</label>
+                    <input type="radio" id="first-rate3" name="rating" value="3" />
+                    <label for="first-rate3" title="Average">3 stars</label>
+                    <input type="radio" id="first-rate4" name="rating" value="4" />
+                    <label for="first-rate4" title="Very good">4 stars</label>
+                    <input type="radio" id="first-rate5" name="rating" value="5" />
+                    <label for="first-rate5" title="Amazing">5 stars</label>
+                </fieldset>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Comment</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="comment">
+                </div>
+                <button class="btn btn-success">Add Review</button>
+            </form>
+
+            <div class="my-3">
+                <% for (let review of found.reviews){ %>
+                    <div class="card">
+                        <div class="card-header">Rating: <%=review.rating %></div>
+                        <div class="card-body">
+                            <p class="card-text">Comment: <%=review.comment %></p>
+                            <a href="#" class="btn btn-primary">Delete</a>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
         </div>
 </div>
 

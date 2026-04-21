@@ -4,6 +4,7 @@ const path = require('path') ;
 const mongoose = require('mongoose');
 const seedDB = require('./Seed') ;
 const productRoutes = require('./routes/product') ;
+const reviewRoutes = require('./routes/review') ;
 const methodoverride = require('method-override') ;
 
 const ejsMate = require('ejs-mate') ;
@@ -21,7 +22,7 @@ app.set('view engine', 'ejs') ;
 app.set('views', path.join(__dirname , 'views')) ;
 
 // public
-app.set(express.static(path.join(__dirname , 'public'))) ;
+app.use(express.static(path.join(__dirname , 'public'))) ;
 
 // for fetching req body
 app.use(express.urlencoded({extended:true})) ;
@@ -32,6 +33,7 @@ app.use(methodoverride('_method')) ;
 // seedDB();
 
 app.use(productRoutes) ; // har incoming req ke liye path check kiya jaye
+app.use(reviewRoutes) ;
 
 const port = 5050 ;
 app.listen((5050) , () => {

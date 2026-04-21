@@ -18,7 +18,11 @@ const product = new mongoose.Schema({
     desc : {
         type : String, 
         trim : true 
-    }
+    },
+    reviews : [{
+        type : mongoose.Schema.Types.ObjectId ,
+        ref : 'Review'
+    }]
 })
 
 let Product = mongoose.model('Product', product) ;

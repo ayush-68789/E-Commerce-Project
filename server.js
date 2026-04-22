@@ -32,15 +32,6 @@ app.use(express.urlencoded({extended:true})) ;
 // for method-Overriding
 app.use(methodoverride('_method')) ;
 
-// flash 
-app.use(flash()) ;
-
-app.use((req, res , next) => {
-    res.locals.success = req.flash('Success') ; 
-    res.locals.error = req.flash('error') ;
-    next() ;
-})
-
 //session 
 app.use(session({
   secret: 'keyboard cat',
@@ -48,6 +39,15 @@ app.use(session({
   saveUninitialized: true,
 //   cookie: { secure: true }
 }))
+// flash 
+app.use(flash()) ;
+
+app.use((req, res , next) => {
+    res.locals.success = req.flash('success') ; 
+    res.locals.error = req.flash('error') ;
+    next() ;
+})
+
 // Sededing DB
 // seedDB();
 

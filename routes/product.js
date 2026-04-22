@@ -32,6 +32,7 @@ router.post('/products', validateProduct , async (req,res)=> {
     try{
         let {name , img , price , desc} = req.body ;
         await Product.create({name , img , price , desc}) ;
+        req.flash('success' ,'Product Added Succesfully') ;
         res.redirect('/products');
     }
     catch(err) {
@@ -69,7 +70,7 @@ router.patch('/products/:id' ,validateProduct ,async (req, res) => {
         let {id} = req.params ;
         let {name , img , price , desc} = req.body ;
         await Product.findByIdAndUpdate(id , {name , img , price , desc}) ;
-        req.flash('msg' ,'Product Edited Succesfully') ;
+        req.flash('success' ,'Product Edited Succesfully') ;
         res.redirect(`/products/${id}`) ;
     }
     catch(err) {
@@ -87,6 +88,8 @@ router.delete('/products/:id' , async (req, res) => {
         //     await Review.findByIdAndDelete(item) ;
         // }
         await Product.findByIdAndDelete(id) ;
+        req.flash('success' ,'Product Deleted Succesfully') ;
+
         res.redirect(`/products`) ;
     }
     catch(err) {

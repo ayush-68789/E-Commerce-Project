@@ -43,11 +43,19 @@
             <div class="my-3">
                 <% for (let review of found.reviews){ %>
                     <div class="card">
-                        <div class="card-header">Rating: <%=review.rating %></div>
+                        <div class="card-header">Rating</div>
+                            <p class="starability-result" data-rating="<%= review.rating %>">
+                                Rated: <%= review.rating %> stars
+                            </p>
                         <div class="card-body">
                             <p class="card-text">Comment: <%=review.comment %></p>
-                            <a href="#" class="btn btn-primary">Delete</a>
+                            <p>
+                                <%if(review.createdAt){ %>
+                                    <%= review.createdAt.toDateString() %>
+                                <% } %>
+                            </p>
                         </div>
+                        <a href="#" class="btn btn-danger">Delete</a>
                     </div>
                 <% } %>
             </div>

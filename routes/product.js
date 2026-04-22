@@ -47,6 +47,11 @@ router.patch('/products/:id' , async (req, res) => {
 // to delete
 router.delete('/products/:id' , async (req, res) => {
     let {id} = req.params ;
+    let product = await Product.findById(id);
+    // for(let item of product.reviews)
+    // {
+    //     await Review.findByIdAndDelete(item) ;
+    // }
     await Product.findByIdAndDelete(id) ;
     res.redirect(`/products`) ;
 })

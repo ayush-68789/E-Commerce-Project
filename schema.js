@@ -22,7 +22,7 @@ const reviewSchema = joi.object({
                 .required()
              ,
     comment : joi.string()
-            .required() 
+                .required() 
 })
 
 module.exports = {product, reviewSchema} ;

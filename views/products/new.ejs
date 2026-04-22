@@ -2,30 +2,53 @@
 <%- include('../partials/navbar') %>
 
 <div class="col-4 mx-auto">
-<form action="/products" method="POST">
+<form action="/products" method="POST" class="needs-validation" novalidate>  <!--novalidate used for server side validation -->
   <div class="row mb-3">
-    <label for="naam" class="col-sm-2 col-form-label">Name</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="naam" placeholder="Name of Product" name="name">
-    </div>
+      <label for="naam" class="col-sm-2 col-form-label">Name</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="naam" placeholder="Name of Product" name="name" required>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+        <div id="validationServerUsernameFeedback" class="invalid-feedback">
+          Please enter a Name.
+        </div>
+      </div>
   </div>
   <div class="row mb-3">
     <label for="img" class="col-sm-2 col-form-label">Image</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="img" name = "img" placeholder="Link for image">
+      <input type="text" class="form-control" id="img" name = "img" placeholder="Link for image" required>
+      <div class="valid-feedback">
+          Looks good!
+        </div>
+        <div id="validationServerUsernameFeedback" class="invalid-feedback">
+          Please enter Image URL.
+        </div>
     </div>
   </div>
   <div class="row mb-3">
     <label for="paisa" class="col-sm-2 col-form-label">Price</label>
     <div class="col-sm-10">
-      <input type="number" class="form-control" id="paisa" name = "price" placeholder="Price of Product">
+      <input type="number" class="form-control" id="paisa" name = "price" placeholder="Price of Product" required>
+      <div class="valid-feedback">
+          Looks good!
+        </div>
+        <div id="validationServerUsernameFeedback" class="invalid-feedback">
+          Please enter Price.
+        </div>
     </div>
   </div>
   <div class="row mb-3">
     <label for="desc" class="col-sm-2 col-form-label">Description</label>
     <div class="col-sm-10">
-      <textarea name="desc" id = "desc" rows="5" cols="60" placeholder="Description of Product" >
-      </textarea>
+      <textarea name="desc" id = "desc" rows="5" cols="60" placeholder="Description of Product" required></textarea>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+        <div id="validationServerUsernameFeedback" class="invalid-feedback">
+          Please enter Description.
+        </div>
     </div>
   </div>
 
@@ -34,3 +57,28 @@
   </div>
 </div>
 </form>
+
+<script>
+
+// IIFE (immediately invoked funtion)
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+</script>

@@ -44,7 +44,7 @@ router.get('/products/:id', async (req, res) => {
     try{
         let {id} = req.params ;
         let found = await Product.findById(id).populate('reviews') ;
-        res.render('products/show', {found}) ;
+        res.render('products/show', {found, msg : req.flash('msg')}) ;
     }
     catch(err) {
         res.status(500).render('error', {err}) ;
@@ -68,7 +68,8 @@ router.patch('/products/:id' ,validateProduct ,async (req, res) => {
     try{
         let {id} = req.params ;
         let {name , img , price , desc} = req.body ;
-        await Product.findByIdAndUpdate(id , {name , img , price , desc})
+        await Product.findByIdAndUpdate(id , {name , img , price , desc}) ;
+        req.flash('msg' ,'Product Edited Succesfully') ;
         res.redirect(`/products/${id}`) ;
     }
     catch(err) {

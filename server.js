@@ -6,6 +6,8 @@ const seedDB = require('./Seed') ;
 const productRoutes = require('./routes/product') ;
 const reviewRoutes = require('./routes/review') ;
 const methodoverride = require('method-override') ;
+const flash = require('connect-flash') ;
+const session = require('express-session') ;
 
 const ejsMate = require('ejs-mate') ;
 
@@ -29,6 +31,23 @@ app.use(express.urlencoded({extended:true})) ;
 
 // for method-Overriding
 app.use(methodoverride('_method')) ;
+
+// flash 
+app.use(flash()) ;
+
+app.use((req, res , next) => {
+    res.locals.success = req.flash('Success') ; 
+    res.locals.error = req.flash('error') ;
+    next() ;
+})
+
+//session 
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+//   cookie: { secure: true }
+}))
 // Sededing DB
 // seedDB();
 

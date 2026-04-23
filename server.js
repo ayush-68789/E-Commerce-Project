@@ -3,13 +3,18 @@ const app = express() ;
 const path = require('path') ;
 const mongoose = require('mongoose');
 const seedDB = require('./Seed') ;
-const productRoutes = require('./routes/product') ;
-const reviewRoutes = require('./routes/review') ;
 const methodoverride = require('method-override') ;
 const flash = require('connect-flash') ;
 const session = require('express-session') ;
+const passport = require('passport') ; 
+const localStrategy = require('passport-local'); 
+const User = require('./models/User') ;
 
 const ejsMate = require('ejs-mate') ;
+
+const productRoutes = require('./routes/product') ;
+const reviewRoutes = require('./routes/review') ;
+const authRoutes = require('./routes/auth') ;
 
 mongoose.connect('mongodb://127.0.0.1:27017/Shopping_App')
 .then(()=> {
@@ -42,17 +47,26 @@ app.use(session({
 // flash 
 app.use(flash()) ;
 
+
+app.use(passport.initialize()) ;
+app.use(passport.session()) ;
+// PASSPORT
+passport.use(new localStrategy(User.authenticate())) ;
+passport.serializeUser(User.serializeUser()) ;
+passport.deserializeUser(User.deserializeUser()) ;
+
 app.use((req, res , next) => {
+    res.locals.currentUser = req.user ;
     res.locals.success = req.flash('success') ; 
     res.locals.error = req.flash('error') ;
     next() ;
 })
-
 // Sededing DB
 // seedDB();
 
 app.use(productRoutes) ; // har incoming req ke liye path check kiya jaye
 app.use(reviewRoutes) ;
+app.use(authRoutes) ;
 
 const port = 5050 ;
 app.listen((5050) , () => {
